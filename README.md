@@ -1,24 +1,41 @@
-# create-temp
+# create-tpl
 
-#### 介绍
+## Introduce
 
-快速创建工具、应用模板如 Vue/React 的脚手架工具，包含开箱即用的 Vitest 测试环境，以及配置好的 TS 和 Vite 环境
+Quick creation tools, application templates such as Vue/React scaffolding tools, including out-of-the-box Vitest test environment, and configured TS and Vite environments
 
-#### 使用说明
+## Install
 
 ```bash
 npm i @mazp/create-tpl -g
+yarn add @mazp/create-tpl -g
 ```
 
+## Usage
+
+### create project
+
 ```bash
-# 创建文件在本地
+# create in the local folder
 cra .
-# 创建文件在文件夹
+# create a new folder
 cra <project-name>
-# 根据项目主流库，安装对应包
+```
+
+![image-20221211104936126](assets/README.assets/image-20221211104936126.png)
+
+### install plugin
+
+>   Currently only supports Vue/React framework
+>
+>   Currently, Plugin  only supports eslint
+
+```bash
+# include your chosen framework, install relative plugin
 cra i eslint
 ```
 
-#### 使用截图
 
-![image-20221101095128353](http://120.48.46.59:3000/gOvfTuzYwwrUXMnjXt-permanent-Snipaste_2022-11-01_09-50-49.webp)
+
+
+
