@@ -121,4 +121,4 @@ function createConfig (configArr = [], format = ["cjs", "es"]) {
   return arr
 }
 
-export default createConfig(["src/index.ts", { input: "src/cli.ts", declaration: false, formatOnce: true }])
+export default createConfig(["src/index.ts"])
