@@ -10,7 +10,7 @@ export default defineConfig({
   mode: "development",
   resolve: {
     alias: {
-      "@src": fromRoot("./src/src"),
+      "@src": fromRoot("./src"),
     },
   },
   test: {
