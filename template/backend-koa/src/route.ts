@@ -5,6 +5,12 @@ import fs from "fs"
 const upload = multer(); // note you can pass `multer` options here
 const router = new Router();
 
+// 1 登录
+// 2 注册
+// 3 充值（）
+// 4 使用次数(每天)
+// 5 等级设置（）
+
 router.get('/', (ctx, next) => {
   // ctx.throw(400, 'name required', { msg: "error" });
   // 1 字符串
