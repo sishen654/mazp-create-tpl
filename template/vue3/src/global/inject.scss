@@ -1,0 +1,49 @@
+// TODO: px转rem
+@function rem($v) {
+  @if (havePercent($v)) {
+    @return $v;
+  } @else {
+    @return if($v, calc((#{$v} / 16) * 1rem), null);
+  }
+}
+
+// TODO: 判断变量是否包含 %
+@function havePercent($v) {
+  $v: $v + "";
+  // 包含 % 返回索引，无则返回null
+  @return str-index($v, "%");
+}
+
+// TODO: 设置文字格式
+@mixin font($size: null, $color: null, $weight: null) {
+  font-size: rem($size);
+  color: $color;
+  font-weight: $weight;
+  text-align: left;
+  word-break: break-all;
+}
+
+// TODO: 设置图片宽高和裁剪格式
+@mixin img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+// TODO: 设置宽高
+@mixin wh($w: 100%, $h: 100%) {
+  width: rem($w);
+  height: rem($h);
+}
+
+@mixin vC() {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+@mixin center() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}

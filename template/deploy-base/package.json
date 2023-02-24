@@ -1,0 +1,16 @@
+{
+  "name": "deploy-web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "sishen <1730821420@qq.com>",
+  "license": "MIT",
+  "dependencies": {
+    "quickly-deploy": "1.1.0"
+  }
+}
