@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.3.2 (2023-02-24)
+
+
+### Features
+
+* add deploy tpl ([4cf927f](https://github.com/sishen654/mazp-create-tpl/commit/4cf927ff3d6bba1a7f462417c64ac7b178bcd938))
+* add new deploy tpl that include some extension ([cf79e6f](https://github.com/sishen654/mazp-create-tpl/commit/cf79e6fa85dce64af3feaa9aef1dded58de1b4b2))
+* add new template util-project ([fc2f8b1](https://github.com/sishen654/mazp-create-tpl/commit/fc2f8b1b7af7e8993360e960333efcdf319da479))
+* add relative readme file ([ff9c694](https://github.com/sishen654/mazp-create-tpl/commit/ff9c694f41c44d7fca785fd2ccbe9547ed6f5236))
+* update backend-koa template ([b46245f](https://github.com/sishen654/mazp-create-tpl/commit/b46245f1f05c8b3f065037e3ef2e2616625a6803))
+
 ## [1.3.0](///compare/v1.2.3...v1.3.0) (2022-12-02)
 
 
