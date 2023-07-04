@@ -29,7 +29,7 @@
     "coverage": "vitest run --coverage",
     "p": "standard-version",
     "c": " git push --tags",
-    "push": "git checkout main & git push github-create-tpl main & git push gitee-create-tpl main"
+    "push": "git checkout main & git push gitee-create-tpl main & git push github-create-tpl main"
   },
   "files": [
     "index.js",
