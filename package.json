@@ -23,12 +23,13 @@
   },
   "scripts": {
     "watch": "cross-env NODE_ENV=development gulp",
+    "w": "pnpm build --watch",
     "build": "rimraf dist & cross-env NODE_ENV=production rollup -c",
     "test": "vitest run",
     "test:watch": "vitest",
     "coverage": "vitest run --coverage",
-    "p": "standard-version",
-    "c": " git push --tags",
+    "p": "standard-version -r",
+    "ct": " git checkout main & git push gitee-create-tpl main --tags & git push github-create-tpl main --tags",
     "push": "git checkout main & git push gitee-create-tpl main & git push github-create-tpl main"
   },
   "files": [
