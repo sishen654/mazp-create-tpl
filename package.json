@@ -23,7 +23,7 @@
   },
   "scripts": {
     "watch": "cross-env NODE_ENV=development gulp",
-    "build": "cross-env NODE_ENV=production gulp",
+    "build": "rimraf dist & cross-env NODE_ENV=production rollup -c",
     "test": "vitest run",
     "test:watch": "vitest",
     "coverage": "vitest run --coverage",
@@ -38,6 +38,8 @@
     "lib"
   ],
   "devDependencies": {
+    "@rollup/plugin-commonjs": "25.0.3",
+    "@rollup/plugin-node-resolve": "15.1.0",
     "@types/fs-extra": "9.0.13",
     "@types/inquirer": "9.0.2",
     "@types/node": "18.11.4",
@@ -50,6 +52,9 @@
     "happy-dom": "7.6.6",
     "nodemon": "2.0.20",
     "rimraf": "3.0.2",
+    "rollup": "3.27.0",
+    "rollup-plugin-dts": "5.3.1",
+    "rollup-plugin-esbuild": "5.0.0",
     "standard-version": "9.5.0",
     "typescript": "4.8.4",
     "vitest": "0.24.3"
