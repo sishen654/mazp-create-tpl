@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.4](https://github.com/sishen654/mazp-create-tpl/compare/v1.3.3...v1.3.4) (2023-08-03)
+
+
+### Features
+
+* add new template about uniapp ([b77f5e4](https://github.com/sishen654/mazp-create-tpl/commit/b77f5e48db5375c87f3fad40f57e7aaa51a710c3))
+
+
+### template info
+
+* add cli template ([48667db](https://github.com/sishen654/mazp-create-tpl/commit/48667dbed90abde32c4370240a60b5cd2f661e78))
+
+
+### Build System
+
+* add rollup construct ([daf8c31](https://github.com/sishen654/mazp-create-tpl/commit/daf8c315cab001e11e20d1992f56f74decd241a2))
+
+
+### Others
+
+* add name prop ([52b9ec8](https://github.com/sishen654/mazp-create-tpl/commit/52b9ec8da31564f26042ff19e9142be5229ad86e))
+* update scripts ([dfefe2a](https://github.com/sishen654/mazp-create-tpl/commit/dfefe2a1c441a4d02a20ffc26dba7c5013f25b1d))
+
 ### [1.3.3](https://github.com/sishen654/mazp-create-tpl/compare/v1.3.2...v1.3.3) (2023-03-03)
 
 ### 1.3.2 (2023-02-24)
