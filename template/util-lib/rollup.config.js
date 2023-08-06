@@ -10,13 +10,13 @@ import esbuild from 'rollup-plugin-esbuild'
 import dts from "rollup-plugin-dts";
 import path from "node:path"
 // 引入 require 函数，方便解析 json 文件
-import { createRequire } from 'module';
+import { createRequire } from 'module';     // node12+
 const require = createRequire(import.meta.url);
 const tsConfig = require('./tsconfig.json');
 const pkg = require('./package.json');
 
 function resolveConfig (option) {
-  let { bundlePath = "dist", declaration = true, bundleName, isResolve = false, isCut = false, format = "cjs", isMinify = true, platform = "node", target = "esnext", plugins = [], input, output, esBuildConfig } = option
+  let { bundlePath = "dist", declaration = true, bundleName, isResolve = false, isCut = false, format = "cjs", isMinify = true, platform = "node", target = "esnext", plugins = [], input, output = {}, esBuildConfig = {}, ...others } = option
   // 1 input 必须存在
   if (!input) throw new Error("Input value must valild!")
   // 2 获取 output
@@ -24,16 +24,16 @@ function resolveConfig (option) {
     file: bundleName ? path.join(bundlePath, bundleName) : undefined,
     dir: bundleName ? undefined : bundlePath,
     format,   // https://rollupjs.org/guide/en/#outputformat
-    preserveModules: isCut
+    preserveModules: isCut,   // https://www.rollupjs.com/guide/big-list-of-options#outputpreservemodules
+    ...output
   }
-  if (output) Object.assign(defaultOutput, output);
   // 3 获取 esBuild 配置
   let esBuildDefaultConfig = {
     minify: process.env.NODE_ENV === 'production' && isMinify,
     platform, // esbuild: export type Platform = 'browser' | 'node' | 'neutral';
     target,   // https://esbuild.github.io/api/#target
+    ...esBuildConfig
   }
-  if (esBuildConfig) Object.assign(esBuildDefaultConfig, esBuildConfig);
   // 4 获取 plugins
   let defaultPlugins = [
     esbuild(esBuildDefaultConfig),
@@ -49,7 +49,8 @@ function resolveConfig (option) {
       exclude: 'node_modules/**',
       include: 'src/**/*.ts'
     },
-    plugins: defaultPlugins.concat(plugins)
+    plugins: defaultPlugins.concat(plugins),
+    ...others
   }]
   // 6 判断是否添加声明文件
   if (declaration && tsConfig.compilerOptions.declaration && format === "es") {
@@ -59,6 +60,7 @@ function resolveConfig (option) {
       defaultOutput.file = undefined;
     }
     returnArr.push({
+      ...others,
       input,
       output: defaultOutput,
       watch: false,
@@ -71,15 +73,17 @@ function resolveConfig (option) {
 function getBundleName (format, name) {
   let matches = name.match(/\/([\w\W]+)/) || []
   let original = matches[1] ? matches[1] : name
-  // 改名
+  // 修改打包文件名
   switch (format) {
     case "es":
       if (path.extname(original) === ".ts") original = original.replace(path.extname(original), ".js");
       else if (path.extname(original) === ".tsx") original = original.replace(path.extname(original), ".jsx");
+      return original
       return {
         bundleName: original
       }
     case "cjs":
+      return original.replace(path.extname(original), ".cjs")
       return {
         bundleName: original.replace(path.extname(original), ".cjs")
       }
@@ -96,29 +100,35 @@ function getBundleName (format, name) {
   }
 }
 
-function createConfig (configArr = [], format = ["cjs", "es"]) {
-  let arr = []
-  configArr.forEach(v => {
-    // 1 传入字符串
-    if (typeof v === "string") {
-      format.forEach(t => {
-        arr.push(...resolveConfig(Object.assign({ input: v, format: t }, getBundleName(t, v))))
-      })
-    }
-    // 2 传入对象
-    else {
-      if (v.formatOnce) { format = ["es"] }
-      format.forEach(t => {
-        if (!t.bundleName) {
-          let defaultConfig = Object.assign({ format: t }, getBundleName(t, v.input))
-          arr.push(...resolveConfig(Object.assign(defaultConfig, v)))
-        } else {
-          arr.push(...resolveConfig(Object.assign({ format: t }, v)))
-        }
-      })
-    }
+function createConfig (configs = [], formatArr = ["cjs", "es"]) {
+  // 1 创建配置数组
+  let configArr = []
+  // 2 循环配置项
+  configs.forEach(item => {
+    // 3 循环打包格式
+    formatArr.forEach(format => {
+      let options = { format }
+      switch (typeof item) {
+        case "string":
+          options.input = item
+          options.bundleName = getBundleName(format, item)
+          break;
+        case "object":
+          options.bundleName = options.bundleName || getBundleName(format, item.input)
+          options = Object.assign(item, options)
+          break;
+      }
+      configArr.push(...resolveConfig(options))
+    })
   })
-  return arr
+  return configArr
 }
 
-export default createConfig(["src/index.ts"])
+export default createConfig([
+  {
+    input: "src/index.ts",
+    treeshake: {
+      moduleSideEffects: false
+    },
+  }
+])
