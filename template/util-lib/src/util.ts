@@ -2,8 +2,6 @@ import fs from "fs-extra"
 import { resolve, dirname, join } from "node:path"
 import { fileURLToPath } from "node:url";
 import { execSync } from "node:child_process"
-import { execaCommandSync } from 'execa'
-import type { ExecaSyncReturnValue, SyncOptions, ExecaSyncError } from 'execa'
 
 type Obj<T = any> = Record<string, T>
 
@@ -73,13 +71,6 @@ export const getFilename = () => fileURLToPath(import.meta.url)
 export const runSync = (command: string) => {
   let stdout = execSync(command).toString('utf-8')
   return stdout.substring(0, stdout.length - 1)
-}
-export const cliRun = (args: string[], options: SyncOptions = {}): ExecaSyncReturnValue | ExecaSyncError => {
-  try {
-    return execaCommandSync(`${args.join(' ')}`, options)
-  } catch (error) {
-    return error as ExecaSyncError
-  }
 }
 
 // 4) 其它
