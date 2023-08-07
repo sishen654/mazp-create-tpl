@@ -16,17 +16,17 @@ const run = (args: string[], options: SyncOptions = {}): ExecaSyncReturnValue | 
 }
 
 describe("cra <project-name>", () => {
-  test('prompts for the project name is project if none supplied', () => {
+  it('prompts for the project name is project if none supplied', () => {
     const { stdout } = run([])
     expect(stdout).toContain("projectName (project)")
   })
 
-  test('prompts for the project name is test-name if specify project name', () => {
+  it('prompts for the project name is test-name if specify project name', () => {
     const { stdout } = run(["test-name"])
     expect(stdout).toContain("projectName (test-name)")
   })
 
-  test('prompts for the framework if choosed project name', () => {
+  it('prompts for the framework if choosed project name', () => {
     const { stdout } = run(["test-name"], { input: "test" })
     expect(stdout).toContain("Select a framework")
   })
