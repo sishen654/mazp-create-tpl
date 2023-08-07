@@ -1,14 +1,17 @@
 import fs from "fs-extra"
 import { resolve, dirname, join } from "node:path"
 import { fileURLToPath } from "node:url";
-import { type Choosed } from "./create-inquir.js"
-import chalk from "chalk"
-import injectData from "./injection.js"
+import { execSync } from "node:child_process"
+import { execaCommandSync } from 'execa'
+import type { ExecaSyncReturnValue, SyncOptions, ExecaSyncError } from 'execa'
 
-// 读取文件夹生成嵌套结构
-export function DirToJson(dirPath: string) {
+type Obj<T = any> = Record<string, T>
+
+// 1) 文件相关
+export const DirToJson = (dirPath: string, exclude?: string[]) => {
   const obj: Record<string, string[]> = {}
   for (const file of fs.readdirSync(dirPath, { withFileTypes: true })) {
+    if (exclude?.includes(file.name)) continue;
     if (file.isDirectory()) {
       const NAME = file.name
       // 1 获取 - 前面的字段
@@ -23,212 +26,100 @@ export function DirToJson(dirPath: string) {
   }
   return obj
 }
-
-// 获取参数
-export function getArgs() {
-  process.argv.splice(0, 2)
-  return process.argv
-}
-
-// 从两级祖父目录合并目录
-export function getPathFromDir(path: string): string {
-  const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), "../")
-  return join(rootDir, path)
-}
-
-// 从执行根目录合并目录
-export function getPathFromExecRoot(path: string = "."): string {
-  return join(process.cwd(), path)
-}
-
-// 判断文件是否存在
-export function fileIsExits(path: string) {
+export const fileIsExits = (path: string) => {
   try {
     return fs.statSync(path)
   } catch (error) {
     return null
   }
 }
-
-// 修改 package.json
-export function changePackageJson(path: string, type: "-D" | "-S", addArr: string[]) {
-  // 1 获取 package.json
-  const data = fs.readJSONSync(path)
-  // 2 循环添加
-  addArr.forEach(v => {
-    const strArr = v.split(" ")
-    if (type === '-D') {
-      // 大于2表示替换
-      if (strArr.length > 2) {
-        delete data.devDependencies[strArr[0]]
-        data.devDependencies[strArr[1]] = strArr[2]
-        return
-      }
-      data.devDependencies[strArr[0]] = strArr[1]
-    }
-    else if (type === '-S') {
-      data.dependencies[strArr[0]] = strArr[1]
-    }
-  })
-  // 3 重新写入
-  fs.writeFileSync(path, JSON.stringify(data, null, 2))
-}
-
-// 修改项目名
-export function changePackageJsonName(path: string, name: string) {
-  // 1 获取 package.json
-  const data = fs.readJSONSync(path)
-  // 2 修改名
-  data.name = name
-  // 3 重新写入
-  fs.writeFileSync(path, JSON.stringify(data, null, 2))
-}
-
-// 修改 tsconfig.json
-export function changeTSConfig(destPath: string, changeObj: Record<string, any>) {
-  const configPath = `${destPath}/tsconfig.json`
-  // 1 原数据
-  const data = fs.readJSONSync(configPath, { encoding: "utf-8" })
-  // 2 修改数据
-  for (const key in changeObj) {
-    const value = changeObj[key];
-    if (key === "compilerOptions") {
-      for (const k in value) {
-        if (Array.isArray(value[k]) && data[key][k]) {
-          data[key][k] = data[key][k].concat(value[k])
-        } else {
-          data[key][k] = value[k]
-        }
-      }
-    }
-    // 需要新装的包
-    else if (key === "-D") {
-      changePackageJson(`${destPath}/package.json`, "-D", value)
-    }
-    else {
-      if (Array.isArray(value) && data[key]) {
-        data[key] = data[key].concat(value)
-      } else {
-        data[key] = value
-      }
-    }
+export const writeJsonSync = (path: string, data: Obj) => fs.writeFileSync(path, JSON.stringify(data, null, 4), { encoding: "utf8" })
+export const readJsonSync = (path: string) => {
+  if (!fileIsExits(path)) throw new Error("file unExits");
+  if (!path.endsWith(".json")) throw new Error("file is not a .json file");
+  try {
+    let data = fs.readFileSync(path, "utf8")
+    return JSON.parse(data)
+  } catch (error) {
+    throw new Error(`parse ${path} error`);
   }
-  // 3 重新写入
-  fs.writeFileSync(configPath, JSON.stringify(data, null, 2))
 }
-
-// 修改 vite.config
-export function changeViteConfig(type: keyof typeof injectData, viteConfigPath: string, destPath: string) {
-  // 1 原数据
-  const data = fs.readFileSync(viteConfigPath, { encoding: "utf-8" })
-  // 2 需要修改的对象
-  const changeObj = injectData[type]["vite.config"]
-  // 3 循环替换字符
-  let newData = data
-  for (const key in changeObj) {
-    const value = changeObj[key];
-    if (key.substring(0, 2) === "__") {
-      newData = data.replace(`/* ${key} */`, value)
-    }
-    else if (key === "-D") {
-      // 修改 package.json
-      changePackageJson(`${destPath}/package.json`, "-D", value)
-    } else if (key === "-S") {
-    } else if (key === "TS") {
-      // 修改 TS
-      if (process.env.HAS_TS === "true") {
-        changeTSConfig(destPath, value)
-      }
-    }
-  }
-  // 4 替换首个 vite
-  newData = newData.replace("vite", "vitest/config")
-  // 5 修改 vite 配置
-  fs.writeFileSync(viteConfigPath, newData, { flag: "w+", encoding: "utf-8" })
-}
-
-// 过滤字符
-export function filterCharacter(arr: any[], filterArr: any[]) {
-  return arr.filter(v => (!filterArr.includes(v)))
-}
-
-// 过滤文件进行重名
-export function filterFile(str: string) {
-  const FILTERARR = ["_gitignore", "_gitattributes"]
-  if (FILTERARR.includes(str)) str = str.replace("_", ".")
-  return str
-}
-
-// 复制目录或者文件
-export function copy(src: string, dest: string) {
-  const stat = fs.statSync(src)
-  if (stat.isDirectory()) copyDir(src, dest);
-  else fs.copyFileSync(src, dest)
-}
-
-// 复制整个目录
-export function copyDir(srcDir: string, destDir: string) {
+export const ensureFile = (path: string) => !fileIsExits(path) && fs.writeFileSync(path, "", { encoding: "utf8" })
+export const copyFile = (src: string, dest: string) => fs.statSync(src).isDirectory() ? copyDir(src, dest) : fs.copyFileSync(src, dest)
+export const copyDir = (srcDir: string, destDir: string, renameRule: [string[], Obj<string>] = [[], {}], exclude?: string[]) => {
   // 1 创建目录
   fs.mkdirSync(destDir, { recursive: true })
   // 2 循环复制
-  const FileArr = filterCharacter(fs.readdirSync(srcDir), [".git"])
-  for (let file of FileArr) {
-    const destFileName = filterFile(file)
-    const srcFile = resolve(srcDir, file)
+  const dirs = fs.readdirSync(srcDir)
+  const FileArr = filterItem(dirs, [".git"])
+  // 3 循环目录
+  for (let fileName of FileArr) {
+    if (exclude?.includes(fileName)) continue;
+    const destFileName = filterRename(fileName, ...renameRule)
+    const srcFile = resolve(srcDir, fileName)
     const destFile = resolve(destDir, destFileName)
-    copy(srcFile, destFile)
+    copyFile(srcFile, destFile)
   }
 }
 
-// 创建项目
-export function createProject(answer: Choosed) {
-  const { projectName, variant, needTest } = answer
-  const srcPath = getPathFromDir(`template/${variant}`)
-  const destPath = getPathFromExecRoot(projectName);
-  // 是否添加测试
-  if (variant.match(/ts/g)) process.env.HAS_TS = "true";
-  // 复制文件夹
-  copyDir(srcPath, destPath)
-  needTest && addTestFramework(destPath)
-  // 修改 package.json 项目名
-  let packageName = projectName
-  if ([".", "./"].includes(packageName)) {
-    packageName = getPathLatestName(process.cwd())
+
+// 2) 路径相关
+export const getPathFromExecRoot = (path: string = ".") => join(process.cwd(), path)
+export const getPathLatestName = (path: string) => path.match(/[^/|^\\]+$/)?.[0] || ""
+export const getDirname = () => dirname(fileURLToPath(import.meta.url))
+export const getFilename = () => fileURLToPath(import.meta.url)
+
+// 3) 执行脚本相关
+export const runSync = (command: string) => {
+  let stdout = execSync(command).toString('utf-8')
+  return stdout.substring(0, stdout.length - 1)
+}
+export const cliRun = (args: string[], options: SyncOptions = {}): ExecaSyncReturnValue | ExecaSyncError => {
+  try {
+    return execaCommandSync(`${args.join(' ')}`, options)
+  } catch (error) {
+    return error as ExecaSyncError
   }
-  changePackageJsonName(`${destPath}/package.json`, packageName)
-  // 输出完成信息
-  console.log(chalk.blue(`Scaffolding project in ${destPath}...\n`));
-  console.log(chalk.red("Done.") + ` Now run:\n`);
-  console.log(`${[".", "./"].includes(projectName) ? "" : `      cd ${projectName}\n`}      npm install
-      npm run dev\n`);
 }
 
-// 错误处理
-export function handlerError(err: Error) {
-  console.log(chalk.red(`${err.message}`));
-  console.log(chalk.bgRed('UNHANDLER ERROR! 🐱‍🏍 Shuting dow...'));
+// 4) 其它
+export const chalk = {
+  bright: (msg: string) => `\x1B[1m${msg}\x1b[0m`,              // 亮色
+  grey: (msg: string) => `\x1B[2m${msg}\x1b[0m`,                // 灰色
+  italic: (msg: string) => `\x1B[3m${msg}\x1b[0m`,              // 斜体
+  underline: (msg: string) => `\x1B[4m${msg}\x1b[0m`,           // 下划线
+  reverse: (msg: string) => `\x1B[7m${msg}\x1b[0m`,             // 反向
+  hidden: (msg: string) => `\x1B[8m${msg}\x1b[0m`,              // 隐藏
+  black: (msg: string) => `\x1B[30m${msg}\x1b[0m`,              // 黑色
+  red: (msg: string) => `\x1B[31m${msg}\x1b[0m`,                // 红色
+  green: (msg: string) => `\x1B[32m${msg}\x1b[0m`,              // 绿色
+  yellow: (msg: string) => `\x1B[33m${msg}\x1b[0m`,             // 黄色
+  blue: (msg: string) => `\x1B[34m${msg}\x1b[0m`,               // 蓝色
+  magenta: (msg: string) => `\x1B[35m${msg}\x1b[0m`,            // 品红
+  cyan: (msg: string) => `\x1B[36m${msg}\x1b[0m`,               // 青色
+  white: (msg: string) => `\x1B[37m${msg}\x1b[0m`,              // 白色
+  blackBG: (msg: string) => `\x1B[40m${msg}\x1b[0m`,            // 背景色为黑色
+  redBG: (msg: string) => `\x1B[41m${msg}\x1b[0m`,              // 背景色为红色
+  greenBG: (msg: string) => `\x1B[42m${msg}\x1b[0m`,            // 背景色为绿色
+  yellowBG: (msg: string) => `\x1B[43m${msg}\x1b[0m`,           // 背景色为黄色
+  blueBG: (msg: string) => `\x1B[44m${msg}\x1b[0m`,             // 背景色为蓝色
+  magentaBG: (msg: string) => `\x1B[45m${msg}\x1b[0m`,          // 背景色为品红
+  cyanBG: (msg: string) => `\x1B[46m${msg}\x1b[0m`,             // 背景色为青色
+  whiteBG: (msg: string) => `\x1B[47m${msg}\x1b[0m`             // 背景色为白色
+}
+
+export const getArgs = () => process.argv.slice(2)
+export const isDef = (val: any) => val !== null && val !== undefined
+export const filterItem = (arr: any[], filterArr: any[]) => arr.filter(v => (!filterArr.includes(v)))
+export const filterRename = (str: string, filter: string[], rules: Obj<string>) => {
+  if (filter.includes(str)) Object.keys(rules).forEach(key => str = str.replace(key, rules[key]))
+  return str
+}
+export const handlerError = (err: Error, tips?: string[]) => {
+  err.message && console.log(`${chalk.red('ERROR')}: ${err.message}`);
+  tips?.forEach(tip => console.log(tip))
+  console.log(chalk.yellow('UNHANDLER ERROR! 🐱 Shuting dow...'));
   process.exit(1);
 }
 
-// 需要测试框架
-export function addTestFramework(destPath: string) {
-  fs.ensureDirSync(`${destPath}/__test__`)
-  const viteConfigPath = `${destPath}\\vite.config${process.env.HAS_TS === "true" ? ".ts" : ".js"}`
-  if (fileIsExits(viteConfigPath)) {
-    changeViteConfig("test", viteConfigPath, destPath)
-  }
-}
 
-export function readPackageJson(path: string) {
-  return fs.readJSONSync(path, { encoding: 'utf8' })
-}
-
-export function getPathLatestName(path: string): string {
-  const REG = /[^/|^\\]+$/
-  const data = path.match(REG) || [""]
-  return data[0]
-}
-
-export function getDirname() {
-  return dirname(fileURLToPath(import.meta.url))
-}
