@@ -154,7 +154,7 @@ export function filterCharacter(arr: any[], filterArr: any[]) {
 
 // 过滤文件进行重名
 export function filterFile(str: string) {
-  const FILTERARR = ["_gitignore"]
+  const FILTERARR = ["_gitignore", "_gitattributes"]
   if (FILTERARR.includes(str)) str = str.replace("_", ".")
   return str
 }
