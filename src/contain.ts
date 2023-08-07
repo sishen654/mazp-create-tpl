@@ -15,6 +15,7 @@ export function getPathFromDir(path: string): string {
 // 修改 package.json
 export function changePackageJson(path: string, type: "-D" | "-S", addArr: string[]) {
   // 1 获取 package.json
+  if (!fileIsExits(path)) return
   const data = fs.readJSONSync(path)
   // 2 循环添加
   addArr.forEach(v => {
@@ -39,6 +40,7 @@ export function changePackageJson(path: string, type: "-D" | "-S", addArr: strin
 // 修改项目名
 export function changePackageJsonName(path: string, name: string) {
   // 1 获取 package.json
+  if (!fileIsExits(path)) return
   const data = fs.readJSONSync(path)
   // 2 修改名
   data.name = name
