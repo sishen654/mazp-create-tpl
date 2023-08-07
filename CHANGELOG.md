@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.4](https://github.com/sishen654/mazp-create-tpl/compare/v1.3.4...v1.4.4) (2023-08-07)
+
+
+### Features
+
+* add common folder for every project ([27095e4](https://github.com/sishen654/mazp-create-tpl/commit/27095e467cf95a5daf56f646952f49edadecd0f8))
+* add gitattributes support ([89d1f05](https://github.com/sishen654/mazp-create-tpl/commit/89d1f050f26425b9ce12aee7a82a40b49befb3b2))
+* add util file ([ae7fd38](https://github.com/sishen654/mazp-create-tpl/commit/ae7fd38135dd26f920341ff3daef45ab67871754))
+* extract utility functions ([b89e823](https://github.com/sishen654/mazp-create-tpl/commit/b89e823cb89d7e2c84b83fe74dade95d8b4cd12c))
+
+
+### Bug Fixes
+
+* package.json file absent not throw error ([cc83f7b](https://github.com/sishen654/mazp-create-tpl/commit/cc83f7ba7105444de295ceaca73d85ac4bbb46ed))
+
+
+### Tests
+
+* update api ([632c599](https://github.com/sishen654/mazp-create-tpl/commit/632c5994db1f35a2a3d6cc875ec21185f69bce5e))
+
+
+### Others
+
+* delete public files that can be auto create ([659c149](https://github.com/sishen654/mazp-create-tpl/commit/659c1497ff32743502eb814bb298cd90c3979d60))
+
+
+### Build System
+
+* refactor config file ([296aa0d](https://github.com/sishen654/mazp-create-tpl/commit/296aa0dffcfb5bf8f587afdfd65252922ef4a4dd))
+
 ### [1.3.4](https://github.com/sishen654/mazp-create-tpl/compare/v1.3.3...v1.3.4) (2023-08-03)
 
 
