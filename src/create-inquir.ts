@@ -1,10 +1,11 @@
 import inquirer, { type DistinctQuestion } from "inquirer"
-import { DirToJson, getPathFromDir } from "./util.js"
+import { getPathFromDir } from "./contain"
+import { DirToJson } from "./util"
 
 // 1) 创建问题集合
 function createQuestions() {
   const QUESTIONS: Array<DistinctQuestion> = []
-  const TEMPLATE = DirToJson(getPathFromDir("template"))
+  const TEMPLATE = DirToJson(getPathFromDir("template"), ['common'])
   const FRAMEWORK = Object.keys(TEMPLATE)
   const PROJECT_NAME = process.env.__CREATE_NAME__ === "undefined" ? "project" : process.env.__CREATE_NAME__
 

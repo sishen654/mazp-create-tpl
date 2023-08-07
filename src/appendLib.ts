@@ -1,7 +1,8 @@
 import chalk from "chalk"
 import path from "node:path"
 import fs from "fs-extra"
-import { readPackageJson, getPathFromDir, copy } from "./util.js"
+import { getPathFromDir } from "./contain"
+import { copyFile } from "./util"
 
 const SRC_LIB = getPathFromDir("lib")
 const DEST_PATH = process.cwd()
@@ -10,7 +11,7 @@ function appendEslint() {
   const PACKAGE_PATH = path.join(DEST_PATH, "package.json")
   const ESLINT_DEST_PATH = path.join(DEST_PATH, ".eslintrc.json")
   // 1 获取项目类型
-  const project = readPackageJson(PACKAGE_PATH)
+  const project = fs.readJSONSync(PACKAGE_PATH, { encoding: 'utf8' })
   const deps = project.dependencies
   const devDeps = project.devDependencies
   if (deps["react"]) {
@@ -21,7 +22,7 @@ function appendEslint() {
       project.dependencies = Object.assign(injectLib["dependencies"], deps)
       project.devDependencies = Object.assign(injectLib["devDependencies"], devDeps)
       // 3 添加对应 eslint 配置文件
-      copy(path.join(SRC_LIB, "/eslint/_react-ts.json"), ESLINT_DEST_PATH)
+      copyFile(path.join(SRC_LIB, "/eslint/_react-ts.json"), ESLINT_DEST_PATH)
     } else { }
   }
   else if (deps["vue"]) {

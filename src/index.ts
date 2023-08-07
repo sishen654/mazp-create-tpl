@@ -5,10 +5,11 @@
   3 复制文件夹
   4 输出信息
 */
-import { getArgs, createProject, handlerError } from "./util.js"
-import { type Choosed } from "./create-inquir.js"
-import startQA from "./create-inquir.js"
-import { appendEslint } from "./appendLib.js"
+import { createProject } from "./contain"
+import { getArgs, handlerError } from "./util"
+import { type Choosed } from "./create-inquir"
+import startQA from "./create-inquir"
+import { appendEslint } from "./appendLib"
 import chalk from "chalk"
 
 // 1) 获取参数
@@ -26,7 +27,6 @@ switch (ARGUMENTS[0]) {
     init()
     break;
 }
-
 
 // 3) 初始化项目
 async function init() {
