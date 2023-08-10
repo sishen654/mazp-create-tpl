@@ -29,8 +29,8 @@
     "test:watch": "vitest",
     "coverage": "vitest run --coverage",
     "p": "standard-version -r",
-    "ct": " git checkout main & git push gitee-create-tpl main --tags & git push github-create-tpl main --tags",
-    "push": "git checkout main & git push gitee-create-tpl main & git push github-create-tpl main"
+    "ct": " git checkout main & git push gitee main --tags & git push github main --tags",
+    "push": "git checkout main & git push gitee main & git push github main"
   },
   "files": [
     "index.js",
