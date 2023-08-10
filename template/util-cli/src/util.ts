@@ -1,4 +1,4 @@
-import fs from "fs-extra"
+import fs from "node:fs"
 import { resolve, dirname, join } from "node:path"
 import { fileURLToPath } from "node:url";
 import { execSync } from "node:child_process"
