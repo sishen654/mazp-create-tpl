@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.1](https://github.com/sishen654/mazp-create-tpl/compare/v1.5.0...v1.5.1) (2023-08-14)
+
+
+### Others
+
+* update demo gif ([a75d255](https://github.com/sishen654/mazp-create-tpl/commit/a75d2552a7ed7eafd4440fa496df3c4ee9f11e17))
+
+
+### Docs
+
+* add lib introduce and usage ([0cf8380](https://github.com/sishen654/mazp-create-tpl/commit/0cf8380fb393281dcbbf71d14a95a829e73f297c))
+* add usage demo ([cfa9acb](https://github.com/sishen654/mazp-create-tpl/commit/cfa9acbb2c02dcd3bb853c8c90c8066c47ef59dc))
+
 ## [1.5.0](https://github.com/sishen654/mazp-create-tpl/compare/v1.4.4...v1.5.0) (2023-08-14)
 
 

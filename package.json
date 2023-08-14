@@ -1,6 +1,6 @@
 {
   "name": "@mazp/create-tpl",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "author": "sishen",
   "license": "MIT",
   "description": "CLI to create project template",
