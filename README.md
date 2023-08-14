@@ -40,7 +40,7 @@ cra <project-name>
 
 ![lib-demo](assets/README.assets/lib-demo.gif)
 
-![Snipaste_2023-08-14_14-37-15](../../../Pictures/%E6%88%AA%E5%9B%BE/Snipaste_2023-08-14_14-37-15.png)
+![Snipaste_2023-08-14_14-37-15](assets/README.assets/Snipaste_2023-08-14_14-37-15-16919973130231.png)
 
 ### install plugin
 
