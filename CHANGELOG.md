@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.2](https://github.com/sishen654/mazp-create-tpl/compare/v1.5.1...v1.5.2) (2023-08-14)
+
+
+### Others
+
+* del unuse img ([5c4b242](https://github.com/sishen654/mazp-create-tpl/commit/5c4b242315868ae4b6368bd9f79608a89200a0fd))
+* update demo gif ([ed579c7](https://github.com/sishen654/mazp-create-tpl/commit/ed579c727fd2c189cf7a5f88bd0eb784151fad26))
+* update demo gif ([42b0b40](https://github.com/sishen654/mazp-create-tpl/commit/42b0b40b057cdfae02c82cfa3ce5245cf3e2fb98))
+
 ### [1.5.1](https://github.com/sishen654/mazp-create-tpl/compare/v1.5.0...v1.5.1) (2023-08-14)
 
 
