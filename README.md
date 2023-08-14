@@ -32,13 +32,21 @@ cra .
 cra <project-name>
 ```
 
-![usage](assets/README.assets/usage.gif)
+![vue3-demo](assets/README.assets/vue3-demo.gif)
+
+![image-20230814143414124](assets/README.assets/image-20230814143414124.png)
+
+### create lib
+
+![lib-demo](assets/README.assets/lib-demo.gif)
+
+![image-20230814143722305](assets/README.assets/image-20230814143722305.png)
 
 ### install plugin
 
 >   Currently only supports Vue/React framework, plugin  only supports eslint
 >
->   ❗：Less used so don't consider adding more extensions
+>   ❗: Less used so don't consider adding more extensions
 
 ```bash
 # include your chosen framework, install relative plugin
