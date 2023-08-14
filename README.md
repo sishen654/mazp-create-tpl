@@ -34,13 +34,13 @@ cra <project-name>
 
 ![vue3-demo](assets/README.assets/vue3-demo.gif)
 
-![image-20230814143414124](assets/README.assets/image-20230814143414124.png)
+![Snipaste_2023-08-14_14-34-12](assets/README.assets/Snipaste_2023-08-14_14-34-12.png)
 
 ### create lib
 
 ![lib-demo](assets/README.assets/lib-demo.gif)
 
-![image-20230814143722305](assets/README.assets/image-20230814143722305.png)
+![Snipaste_2023-08-14_14-37-15](../../../Pictures/%E6%88%AA%E5%9B%BE/Snipaste_2023-08-14_14-37-15.png)
 
 ### install plugin
 

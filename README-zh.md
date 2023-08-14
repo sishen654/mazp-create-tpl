@@ -32,15 +32,15 @@ cra .
 cra <project-name>
 ```
 
-![vue3-demo](assets/README-zh.assets/vue3-demo-16919950800761.gif)
+![vue3-demo](assets/README-zh.assets/vue3-demo.gif)
 
-![image-20230814143414124](assets/README-zh.assets/image-20230814143414124.png)
+![Snipaste_2023-08-14_14-34-12](assets/README-zh.assets/Snipaste_2023-08-14_14-34-12.png)
 
 ### 创建库
 
-![lib-demo](assets/README-zh.assets/lib-demo.gif)
+![lib-demo](assets/README-zh.assets/lib-demo-16919971774442.gif)
 
-![image-20230814143722305](assets/README-zh.assets/image-20230814143722305.png)
+![Snipaste_2023-08-14_14-37-15](assets/README-zh.assets/Snipaste_2023-08-14_14-37-15.png)
 
 ### 下载插件
 
