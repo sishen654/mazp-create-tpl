@@ -1,0 +1,40 @@
+{
+  "name": "@chrome/json-ts",
+  "version": "1.0.0",
+  "private": "true",
+  "author": "sishen",
+  "license": "MIT",
+  "description": "Input JSON, output TS type",
+  "type": "module",
+  "scripts": {
+    "w": "cross-env NODE_ENV=development gulp",
+    "b": "gulp",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "coverage": "vitest run --coverage",
+    "p": "standard-version",
+    "c": " git push --tags",
+    "push": "git checkout main & git push gitee main & git push github main"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "9.0.13",
+    "@types/node": "18.11.4",
+    "chalk": "5.3.0",
+    "chrome-types": "0.1.221",
+    "cross-env": "^7.0.3",
+    "gulp": "4.0.2",
+    "gulp-clean": "0.4.0",
+    "gulp-sass": "5.1.0",
+    "gulp-typescript": "6.0.0-alpha.1",
+    "gulp-uglify": "3.0.2",
+    "happy-dom": "7.7.0",
+    "merge2": "1.4.1",
+    "rimraf": "3.0.2",
+    "sass": "1.64.2",
+    "standard-version": "9.5.0",
+    "typescript": "4.8.4",
+    "vite": "^3.2.4",
+    "vitest": "^0.24.3"
+  },
+  "dependencies": {}
+}
