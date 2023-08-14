@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/sishen654/mazp-create-tpl/compare/v1.4.4...v1.5.0) (2023-08-14)
+
+
+### Others
+
+* add end_of_line lint ([e9b5427](https://github.com/sishen654/mazp-create-tpl/commit/e9b5427509c5158c92e3e0c402287ae3c012cf8e))
+* update sctipts ([c958fd0](https://github.com/sishen654/mazp-create-tpl/commit/c958fd00f1ef2e675ed480e2bfe08eb59b89df43))
+* windows img compatible ([a1f8da8](https://github.com/sishen654/mazp-create-tpl/commit/a1f8da8cb55dea7aed66b16109f19b4b8f5ddda0))
+
+
+### template info
+
+* add new template about chrome plugin ([86a2317](https://github.com/sishen654/mazp-create-tpl/commit/86a2317b57354786be5d6f180542beb2f53e33b2))
+
 ### [1.4.4](https://github.com/sishen654/mazp-create-tpl/compare/v1.3.4...v1.4.4) (2023-08-07)
 
 
