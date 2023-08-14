@@ -32,7 +32,7 @@ cra .
 cra <project-name>
 ```
 
-![start](assets/README-zh.assets/start.gif)
+![usage](assets/README-zh.assets/usage.gif)
 
 ### 下载插件
 

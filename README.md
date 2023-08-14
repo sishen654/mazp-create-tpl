@@ -32,7 +32,7 @@ cra .
 cra <project-name>
 ```
 
-![start](assets/README.assets/start.gif)
+![usage](assets/README.assets/usage.gif)
 
 ### install plugin
 
