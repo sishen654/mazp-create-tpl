@@ -6,6 +6,8 @@
 *.vue   	text eol=lf
 *.json      text eol=lf
 *.css       text eol=lf
+*.scss       text eol=lf
+*.env       text eol=lf
 *.html      text eol=lf
 *.md binary
 # 如果你不希望产生文本差异，以及行尾转换应用到任何二进制文件。可以使用系统内置的 binary，它会取消 text 和 diff 属性。
