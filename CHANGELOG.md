@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/sishen654/mazp-create-tpl/compare/v1.5.5...v1.6.0) (2023-09-12)
+
+
+### template info
+
+* add new template about vue2-ts ([b215d4f](https://github.com/sishen654/mazp-create-tpl/commit/b215d4fcc40f7df3ebb12bc1b8dedd737114679c))
+* add template about vue2-ts ([ee6d478](https://github.com/sishen654/mazp-create-tpl/commit/ee6d47800b36c8ce24fd43f4221651a74a8bc940))
+
 ### [1.5.5](https://github.com/sishen654/mazp-create-tpl/compare/v1.5.4...v1.5.5) (2023-08-23)
 
 
