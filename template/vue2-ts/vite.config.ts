@@ -33,7 +33,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "vue": "vue/dist/vue.esm.js",
-      "@global": fromRoot("./global"),
+      "@global": fromRoot("./src/global"),
       "@util": fromRoot("./src/util"),
       "@com": fromRoot("./src/components"),
       "@page": fromRoot("./src/page"),

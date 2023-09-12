@@ -14,7 +14,7 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@global/*": ["global/*"],
+      "@global/*": ["src/global/*"],
       "@util/*": ["src/util/*"],
       "@com/*": ["src/components/*"],
       "@page/*": ["src/page/*"],
