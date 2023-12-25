@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.2](https://github.com/sishen654/mazp-create-tpl/compare/v1.6.1...v1.6.2) (2023-12-25)
+
+
+### Bug Fixes
+
+* 修复默认样式引入 ([cdeb929](https://github.com/sishen654/mazp-create-tpl/commit/cdeb929bcda8eb7d32b9a8d014c0b6c649224aee))
+
+
+### Others
+
+* add vite lib ([95cbc3b](https://github.com/sishen654/mazp-create-tpl/commit/95cbc3b2269d17f06a8d1068b42bd85f6d5da8fb))
+
 ### [1.6.1](https://github.com/sishen654/mazp-create-tpl/compare/v1.6.0...v1.6.1) (2023-12-25)
 
 
