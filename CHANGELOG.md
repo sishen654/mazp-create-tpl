@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.1](https://github.com/sishen654/mazp-create-tpl/compare/v1.6.0...v1.6.1) (2023-12-25)
+
+
+### Features
+
+* 添加 Uniapp 对应模板 ([0474f89](https://github.com/sishen654/mazp-create-tpl/commit/0474f89dc149ca2ec08d253ae62bc4fbda6c044e))
+* add new react tpl with whole lib ([1f62cc1](https://github.com/sishen654/mazp-create-tpl/commit/1f62cc1027a512ee243d9e81f840d756e449ce1a))
+
 ## [1.6.0](https://github.com/sishen654/mazp-create-tpl/compare/v1.5.5...v1.6.0) (2023-09-12)
 
 
