@@ -1,0 +1,52 @@
+version: '3.8'
+services:
+  nest-app:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    depends_on:
+      - mysql-container
+      - redis-container
+      - minio-container
+    ports:
+      - 3005:3005
+    networks:
+      - common-network
+    restart: always 
+  mysql-container:
+    image: mysql
+    volumes:
+      # windows 测试使用
+      - /docker-tmp/mysql:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: meeting_room_booking_system
+      MYSQL_ROOT_PASSWORD: 123456
+    networks:
+      - common-network
+    restart: always
+  redis-container:
+    image: redis
+    volumes:
+      # windows 测试使用
+      - /docker-tmp/redis:/data
+    ports:
+      - 4344:6379
+    networks:
+      - common-network
+    restart: always
+  minio-container:
+    image: bitnami/minio:latest
+    ports:
+      - 9000:9000
+      - 9001:9001
+    volumes:
+      - /docker-tmp/minio:/bitnami/minio/data
+    environment:
+      MINIO_ROOT_USER: root
+      MINIO_ROOT_PASSWORD: 123456
+    networks:
+      - common-network
+    restart: always
+networks:
+  common-network:
+    driver: bridge
